@@ -1,0 +1,236 @@
+@font-face {
+	
+	font-family: WoW2;
+	src: url(WoW-plexus.ttf);
+}
+
+@font-face {
+	font-family: WoW;
+	src: url(Font.ttf);
+}
+	
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* background-color : #231A13; */
+	background-color : #ffffff;
+	/*background-color : #416678;*/
+	/*background-image: url("background.gif");*/
+
+}
+
+a {
+	text-decoration: none;
+}
+
+.mainMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+.mainMenuList {
+  display: flex;
+  /*flex-direction: center;*/
+  justify-content: center;
+  list-style: none;
+  /*margin: 0;
+  padding: 0;*/
+  white-space: nowrap;
+  
+     
+}
+
+.mainMenuList li {
+	
+	display : flex;
+	text-align: center;
+	/*margin-left: 10px;*/
+	margin-right: 20px;
+	padding: 5px;
+	font-family: WoW2;
+	font-size: 30px;
+	color: #416678;
+	border-radius: 5px;
+}
+
+.mainMenuList li a:visited {
+	 color: #416678; 
+}
+
+.mainMenuList li:hover {
+	 background-color: #416678;
+ }
+ 
+.mainMenuList li:hover a{
+	 color: #D89B41;
+ }
+
+.mainMenuParagraph {
+	margin-bottom: 1px;
+}
+
+#later {
+	font-family: Calibri;
+}
+
+
+
+#workInProgress {
+	text-align: center;
+	font-family: "Comic Sans MS";
+
+}
+
+#container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: auto;
+	/*margin: 0 auto;*/
+		
+}
+ 
+/*#leftMenu {*/
+/*  display : flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: flex-start;*/
+/*  !*display: table;*/
+/*  margin: 0 left;*!*/
+/*  width: 200px;*/
+/*  !*float: left;*!*/
+/*  !*height: 1000px;*!*/
+/*  */
+/* }*/
+/* */
+/*.leftMenuTitle {*/
+/*	display: flex;*/
+/*	color: #CB7A2F;*/
+/*	font-family: WoW2;*/
+/*	justify-content: center;*/
+/*}*/
+
+/*.leftMenuTitle a:visited {*/
+/*	color: #CB7A2F;*/
+/*}*/
+
+/*.leftMenuTitle a:hover {*/
+/*	color: #416678;*/
+/*}*/
+
+/*.leftMenuList {*/
+/*  list-style: none;*/
+/*  display : flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: flex-start;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+/*.leftMenuList li {*/
+/*	display : flex;*/
+/*	!*margin-left: 10px;*!*/
+/*	margin-right: 20px; */
+/*    padding: 3px; */
+/*	font-family: WoW2;*/
+/*	font-size: 15px;*/
+/*	color: #416678;*/
+/*	border-radius: 5px;*/
+/*	white-space: nowrap;*/
+/*}*/
+
+/*.leftMenuList li a:visited {*/
+/*	 color: #416678; */
+/*}*/
+
+/*.leftMenuList li:hover {*/
+/*	 background-color: #416678;*/
+/* }*/
+/* */
+/*.leftMenuList li:hover a{*/
+/*	 color: #D89B41;*/
+/* }*/
+ 
+/*#rightMenu {
+  width: 200px;
+  float: right;
+  height: 1000px;
+ }*/
+ 
+#mainContent {
+	display : flex;
+	flex-direction: column;
+	justify-content: center;
+	/*position: relative;*/
+	/*margin: 0 0 0 0;*/
+	width: 800px;
+}
+ 
+ 
+  
+
+.mainLink {
+	display : flex;
+	position:relative;
+	/*display: table;*/
+	/*margin: 0 auto;*/
+	margin-top: 20px;
+	background-repeat: no-repeat;
+	height: 300px;
+	width: 720px;
+	border-radius: 5px;
+}
+#epicLink {
+	background-image: url(SW_epic.jpg);
+}
+.mainLinkButton {
+	position: absolute;
+	border-radius: 10px;
+	font-family: WoW2;
+	font-size: 15px;
+	outline: none;
+	transition: .3s;
+	box-shadow: 0 8px 15px rgba(0,0,0,.1);
+}
+#epicLinkButton {
+	height: 50px;
+	width: 230px;
+	top: 30px;
+	left: 450px;
+	color: #D89B41;
+	background-color: #416678;
+}
+
+#epicLinkButton:hover {
+	background-color: #D89B41;
+	color: #416678;
+	transform: translateY(-7px);
+	box-shadow: 0 15px 20px rgba(128,153,165,.9);
+}
+
+#displayLink {
+	background-image: url(Displays.jpg);
+}
+
+#displayLinkButton {
+	height: 50px;
+	width: 150px;
+	top: 50px;
+	left: 350px;
+	color: #8EC45E;
+	background-color: #C25E28;
+}
+
+#displayLinkButton:hover {
+	background-color: #8EC45E;
+	color: #C25E28;
+	transform: translateY(-7px);
+	box-shadow: 0 15px 20px rgba(194, 94, 40, .9);
+}
+
+
+
+
+
+

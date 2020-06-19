@@ -1,0 +1,271 @@
+@font-face {
+	
+	font-family: WoW2;
+	src: url(WoW-plexus.ttf);
+}
+
+@font-face {
+	font-family: WoW;
+	src: url(Font.ttf);
+}
+	
+body {
+	display: flex;
+	flex-direction: column;
+	/* background-color : #231A13; */
+	/*background-color : #ffffff;*/
+	/*background-color : #416678;*/
+	background-image: url("background.gif");
+
+}
+
+a {
+	text-decoration: none;
+}
+
+
+
+.mainMenu {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+}
+
+.mainMenuList {
+	display: flex;
+	/*flex-direction: center;*/
+	justify-content: center;
+	list-style: none;
+	/*margin: 0;
+    padding: 0;*/
+	white-space: nowrap;
+
+
+}
+
+.mainMenuList li {
+
+	display : flex;
+	justify-content: center;
+	text-align: center;
+	/*margin-left: 10px;*/
+	margin-right: 20px;
+	padding: 5px;
+	font-family: WoW2;
+	font-size: 30px;
+	color: #416678;
+	border-radius: 5px;
+
+}
+
+#myCollection {
+
+	vertical-align: center;
+}
+
+.mainMenuList li a:visited {
+	color: #416678;
+}
+
+.mainMenuList li:hover {
+	background-color: #416678;
+}
+
+.mainMenuList li:hover a{
+	color: #D89B41;
+}
+
+.mainMenuParagraph {
+	margin-bottom: 1px;
+}
+
+#later {
+	font-family: "Comic Sans MS";
+}
+
+
+ 
+
+
+
+
+
+
+#containerDatabase {
+	display: flex;
+
+	/*justify-content: center;*/
+	width: 1400px;
+	margin-left: 20px;
+
+;
+
+	/*margin: 0 auto;*/
+}
+
+#leftMenuDatabase {
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+
+}
+
+#leftMenuTitleDatabase {
+	margin-left: 10px;
+	color: #416678;
+	font-family: WoW2;
+}
+
+.selectFilter {
+	display: flex;
+	width: 150px;
+	/*background-image: url("background.gif");*/
+	font-family: "Comic Sans MS";
+	background-color: #436677;
+	color: #D89B41;
+	border-radius: 5px;
+	outline: none;
+
+}
+
+.optionFilter {
+	border-radius: 5px;
+}
+
+#Druid {
+	color: #ff7c0a;
+}
+
+#Hunter {
+	color: #aad372;
+}
+
+#Mage {
+	color: 	#68ccef;
+}
+
+#Paladin {
+	color: #f48cba;
+}
+
+#Priest {
+	color: #f0ebe0;
+}
+
+#Rogue {
+	color: #fff468;
+}
+
+#Shaman {
+	color: #2993FB;
+}
+
+#Warlock {
+	color: #9382c9;
+}
+
+#Warrior {
+	color: #c69b6d;
+}
+
+#Common {
+	color: #DBD3D3;
+}
+
+#Uncommon {
+	color: #55AA65;
+}
+
+#Rare {
+	color: #2993FB;
+}
+
+#Epic {
+	color: #B263B0;
+}
+
+#Horde {
+	color: #FD1A0C;
+}
+
+#Alliance {
+	color: #2993FB;
+}
+
+#filterButton {
+	margin-left: 100px;
+	font-family: "Comic Sans MS";
+	border-radius: 10px;
+	border-width: 1px;
+	outline: none;
+	background-color: #436677;
+	color: #D89B41;
+}
+
+#resultTable {
+	width: 1150px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+
+	border: solid #416678;
+	/*background-color: #416678;*/
+	background-image: url("background2.png");
+
+}
+
+#startText1 {
+	font-family: WoW2;
+	color: #416678;
+	margin-left: 180px;
+	margin-top: 60px;
+}
+
+#startText2 {
+	font-family: WoW2;
+	color: #416678;
+	margin-left: 310px;
+}
+
+#notFoundText {
+	font-family: "Comic Sans MS";
+	text-align: center;
+	margin-left: 260px;
+	margin-top: 50px;
+	font-size: 30px;
+	line-height: 75px;
+	color: #416678;
+}
+
+
+.createdOverallDiv {
+	display: flex;
+	margin: 10px;
+	display: flex;
+	width: 550px;
+	height: 350px;
+}
+
+.createdParameters {
+	font-size: 17px;
+	margin-left: 10px;
+	color: #416678;
+
+}
+
+.parametersName {
+	font-weight: bold;
+	color: #6E4277;
+	font-family: "Comic Sans MS";
+}
+
+.parametersValue {
+	font-weight: bold;
+	color: #416678;
+	font-family: "Comic Sans MS"
+}
+
+
+

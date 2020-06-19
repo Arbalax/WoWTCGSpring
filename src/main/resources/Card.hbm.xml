@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ru.wowtcgdatabase.model.Card" table="cardswow">
+        <meta attribute="class-description">
+            This class contains developer details.
+        </meta>
+        <id name="cardId" type="int" column="CardID">
+            <generator class="native"/>
+        </id>
+        <property name="cardName" column="Name" type="string"/>
+        <property name="imageUrl" column="ImageURL" type="string"/>
+        <property name="imageFullUrl" column="ImageFullUrl" type="string"/>
+        <property name="setName" column="SetName" type="string"/>
+        <property name="numberInSet" column="NumberInSet" type="int"/>
+        <property name="rarity" column="Rarity" type="string"/>
+        <property name="type" column="Type" type="string"/>
+        <property name="faction" column="Faction" type="string"/>
+        <property name="cardClass" column="Class" type="string"/>
+        <property name="race" column="Race" type="string"/>
+        <property name="cost" column="Cost" type="int"/>
+        <property name="health" column="Health" type="int"/>
+        <property name="attack" column="Attack" type="int"/>
+        <property name="strikeCost" column="StrikeCost" type="int"/>
+        <property name="attack" column="Attack" type="int"/>
+        <property name="attackType" column="AttackType" type="string"/>
+        <property name="defence" column="Defence" type="int"/>
+        <property name="allyClass" column="AllyClass" type="string"/>
+    </class>
+
+</hibernate-mapping>
+
