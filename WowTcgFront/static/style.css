@@ -23,7 +23,10 @@ a {
 	text-decoration: none;
 }
 
-
+#topTitle {
+	font-family: WoW2;
+	color: #C25E28;
+}
 
 .mainMenu {
 	display: flex;
@@ -84,7 +87,9 @@ a {
 	font-family: "Comic Sans MS";
 }
 
-
+#myCollectionReference {
+	padding-top: 35px;
+}
  
 
 
@@ -239,6 +244,15 @@ a {
 	color: #416678;
 }
 
+#notFoundTextCollection {
+	font-family: "Comic Sans MS";
+	text-align: center;
+	margin-left: 165px;
+	margin-top: 50px;
+	font-size: 30px;
+	line-height: 75px;
+	color: #416678;
+}
 
 .createdOverallDiv {
 	display: flex;

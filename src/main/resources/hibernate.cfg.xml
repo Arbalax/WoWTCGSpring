@@ -10,7 +10,9 @@
         <property name="hibernate.connection.driver_class">
             com.mysql.jdbc.Driver
         </property>
-
+        <property name="hibernate.connection.isolation">
+            2
+        </property>
         <!-- Assume testHibernate is the database name -->
         <property name="hibernate.connection.url">
             jdbc:mysql://localhost:3306/maindata?serverTimezone=Europe/Moscow
@@ -24,6 +26,7 @@
         <property name="show_sql">true</property>
 
         <mapping class="ru.wowtcgdatabase.model.Card" />
+        <mapping class="ru.wowtcgdatabase.model.MyCollection" />
 
     </session-factory>
 </hibernate-configuration>

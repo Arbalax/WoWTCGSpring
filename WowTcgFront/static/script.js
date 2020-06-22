@@ -1,3 +1,5 @@
+let cardId;
+
 
 filterButton.onclick = async function query() {
 
@@ -80,7 +82,7 @@ filterButton.onclick = async function query() {
 
 		if (typeof resultCard[key].cardName !== 'undefined') {
 
-
+			cardId = resultCard[key].cardId;
 
 			let resultTable = document.getElementById('resultTable');
 
@@ -89,6 +91,53 @@ filterButton.onclick = async function query() {
 
 			resultTable.append(createdOverallDiv);
 
+			let createdButtonsDiv = document.createElement('div');
+			createdButtonsDiv.className = "createdButtonsDiv";
+
+			createdOverallDiv.append(createdButtonsDiv);
+
+			let createdButtonAddDiv = document.createElement('div');
+			createdButtonAddDiv.className = "createdButtonAddDiv";
+            createdButtonAddDiv.innerHTML = "<p><input id='addButton' type='button' value='+'></p>";
+
+            createdButtonsDiv.append(createdButtonAddDiv);
+
+            createdButtonAddDiv.addEventListener('click', async function addCard (event) {
+            alert('"'+resultCard[key].cardName + '" has been added to your collection.');
+                let cardAdd = {
+                    customerId: 1,
+                    cardId: resultCard[key].cardId,
+                };
+                let addResponse = await fetch ('http://127.0.0.1:8080/addcard/', {
+
+                    method: 'POST',
+
+                    headers: {
+                        'Content-Type': 'application/json', // charset=utf-8
+                        'Accept': 'application/json',
+                        'Origin': 'http://127.0.0.1:8070/',
+                        'Access-Control-Request-Method': 'POST',
+                        'Access-Control-Request-Headers': 'Content-Type',
+                    },
+                    body: JSON.stringify(cardAdd)
+                });
+                console.log(JSON.stringify(cardAdd));
+                // alert (JSON.stringify(properties));
+
+
+                // let addResult = await addResponse.json();
+                // console.log(addResult);
+            });
+
+            // createdButtonAddDiv.addEventListener('click', {
+            //     handleEvent: function (event) {
+            //     alert('Событие вызвал handleEvent');
+            //     }
+            //
+            // });
+
+
+			// document.getElementById('addButton').addEventListener('click', console.log(resultCard[key].cardName));
 
 
 			let createdImageDiv = document.createElement('div');
@@ -116,14 +165,16 @@ filterButton.onclick = async function query() {
 			}
 
 			let resultAllyClass;
-			if (typeof resultCard[key].allyClass !== 'undefined') {
+			if (resultCard[key].allyClass !== null) {
+			// if (typeof resultCard[key].allyClass !== 'undefined') {
 				resultAllyClass = "<span class = 'parametersName'>Ally Class: </span>" + "<span class = 'parametersValue'>" + resultCard[key].allyClass + "</span><br/>";
 			} else {
 				resultAllyClass = ""
 			}
 
 			let resultRace;
-			if (typeof resultCard[key].race !== 'undefined') {
+			if (resultCard[key].race !== null) {
+			// if (typeof resultCard[key].race !== 'undefined') {
 				resultRace = "<span class = 'parametersName'>Race: </span>" + "<span class = 'parametersValue'>" + resultCard[key].race + "</span><br/>";
 			} else {
 				resultRace = ""
@@ -151,7 +202,8 @@ filterButton.onclick = async function query() {
 			}
 
 			let resultAttackType;
-			if (typeof resultCard[key].attackType !== 'undefined') {
+			if (resultCard[key].attackType !== null) {
+			// if (typeof resultCard[key].attackType !== 'null') {
 				resultAttackType = "<span class = 'parametersName'>Attack Type: </span>" + "<span class = 'parametersValue'>" + resultCard[key].attackType + "</span><br/>";
 			} else {
 				resultAttackType = ""
@@ -192,6 +244,9 @@ filterButton.onclick = async function query() {
 	};
 
 };
+
+
+
 
 
 
