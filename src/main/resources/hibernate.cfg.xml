@@ -27,6 +27,7 @@
 
         <mapping class="ru.wowtcgdatabase.model.Card" />
         <mapping class="ru.wowtcgdatabase.model.MyCollection" />
+        <mapping class="ru.wowtcgdatabase.model.Customer" />
 
     </session-factory>
 </hibernate-configuration>

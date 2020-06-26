@@ -7,6 +7,7 @@ public class Request {
     int cost;
     String faction;
     String rarity;
+    int customerId;
 
     public String getSetName() {
         return setName;
@@ -54,5 +55,13 @@ public class Request {
 
     public void setRarity(String rarity) {
         this.rarity = rarity;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }

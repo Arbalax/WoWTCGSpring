@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.wowtcgdatabase.DAO.CardsDAO;
 import ru.wowtcgdatabase.DAO.CollectionDAO;
+import ru.wowtcgdatabase.DAO.CustomerDAO;
 import ru.wowtcgdatabase.TestHibernate;
 import ru.wowtcgdatabase.model.Card;
 import ru.wowtcgdatabase.model.MyCollection;
@@ -71,13 +72,15 @@ public class WowRestController {
         request.setFaction(requestBody.getFaction());
         request.setRarity(requestBody.getRarity());
         request.setCost(requestBody.getCost());
+        request.setCustomerId(requestBody.getCustomerId());
 
         System.out.println("Set Name: " + request.getSetName() +
                 " Rarity: " + request.getRarity() +
                 " Type: " + request.getType() +
                 " Faction: " + request.getFaction() +
                 " Class: " + request.getCardClass() +
-                " Cost: " + request.getCost());
+                " Cost: " + request.getCost() +
+                " CustomerId: " + request.getCustomerId());
 
         CardsDAO cardsDAO = new CardsDAO(request);
         List cards = cardsDAO.getMyCollection();
@@ -96,7 +99,7 @@ public class WowRestController {
     }
 
     @PostMapping("/addcard")
-    public ResponseEntity <String> addCard(@RequestBody CollectionRequest requestBody) throws JsonProcessingException {
+    public ResponseEntity <String> addCard(@RequestBody CollectionRequest requestBody) {
 
         CollectionRequest collectionRequest = new CollectionRequest();
         collectionRequest.setCardId(requestBody.getCardId());
@@ -114,7 +117,7 @@ public class WowRestController {
     }
 
     @PostMapping("/deletecard")
-    public ResponseEntity <String> deleteCard(@RequestBody CollectionRequest requestBody) throws JsonProcessingException {
+    public ResponseEntity <String> deleteCard(@RequestBody CollectionRequest requestBody) {
 
         CollectionRequest collectionRequest = new CollectionRequest();
         collectionRequest.setCardId(requestBody.getCardId());
@@ -129,5 +132,58 @@ public class WowRestController {
 
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/auth")
+    public ResponseEntity <String> authentication(@RequestBody CustomerRequest requestBody) throws JsonProcessingException {
+
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setLogin(requestBody.getLogin());
+        customerRequest.setPassword(requestBody.getPassword());
+
+        System.out.println("Login: " + customerRequest.getLogin() +
+                " Password: " + customerRequest.getPassword());
+
+        CustomerDAO customerDAO = new CustomerDAO(customerRequest);
+        List loginResponse = customerDAO.logIn();
+
+        System.out.println(loginResponse);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+
+        String json = objectMapper.writer().writeValueAsString(loginResponse);
+
+        System.out.println(json);
+
+
+        return new ResponseEntity<>(json, HttpStatus.OK);
+    }
+
+    @PostMapping("/reg")
+    public ResponseEntity <String> registration(@RequestBody CustomerRequest requestBody) throws JsonProcessingException {
+
+        CustomerRequest customerRequest = new CustomerRequest();
+        customerRequest.setLogin(requestBody.getLogin());
+        customerRequest.setPassword(requestBody.getPassword());
+        customerRequest.setCustomerName(requestBody.getCustomerName());
+
+        System.out.println("Login: " + customerRequest.getLogin() +
+                " Password: " + customerRequest.getPassword() +
+                " Name: " + customerRequest.getCustomerName());
+
+        CustomerDAO customerDAO = new CustomerDAO(customerRequest);
+        List check = customerDAO.logIn();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writer().writeValueAsString(check);
+        System.out.println(json);
+
+        if (json.equals("[]")) {
+            customerDAO.signUp();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

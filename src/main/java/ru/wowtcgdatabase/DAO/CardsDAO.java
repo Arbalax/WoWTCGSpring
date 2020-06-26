@@ -47,12 +47,12 @@ public class CardsDAO {
         session.beginTransaction();
         cards = session.createQuery("select cards FROM CardWow cards inner join MyCollection collection on cards.cardId = collection.cardId " +
                 "where cards.rarity like case when '"+request.getRarity()+"' = 'All' then '%' else '"+request.getRarity()+"' end " +
-                "and type like case when '"+request.getType()+"' = 'All' then '%' else '"+request.getType()+"' end " +
+                "and cards.type like case when '"+request.getType()+"' = 'All' then '%' else '"+request.getType()+"' end " +
                 "and cards.setName like case when '"+request.getSetName()+"' = 'All' then '%' else '"+request.getSetName()+"' end " +
                 "and cards.cardClass like case when '"+request.getCardClass()+"' = 'All' then '%' else '"+request.getCardClass()+"' end " +
                 "and cards.cost like case when "+request.getCost()+" =-10 then '%' when "+request.getCost()+" =10 then '__' else "+request.getCost()+" end " +
                 "and cards.faction like case when '"+request.getFaction()+"' = 'All' then '%' else '"+request.getFaction()+"' end " +
-                "and collection.customerId = 1").list();
+                "and collection.customerId = " + request.getCustomerId()).list();
         System.out.println(cards);
         session.close();
         sessionFactory.close();

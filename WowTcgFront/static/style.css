@@ -11,7 +11,9 @@
 	
 body {
 	display: flex;
+	justify-content: center;
 	flex-direction: column;
+
 	/* background-color : #231A13; */
 	/*background-color : #ffffff;*/
 	/*background-color : #416678;*/
@@ -23,19 +25,98 @@ a {
 	text-decoration: none;
 }
 
+#topMenu {
+	display: flex;
+	flex-direction: row;
+	/*justify-content: center;*/
+}
+
 #topTitle {
+	display: flex;
 	font-family: WoW2;
 	color: #C25E28;
+	margin-left: 20px;
+}
+
+#topTitleCollection{
+	font-family: WoW2;
+	color: #C25E28;
+}
+
+#loginReference {
+	border-radius: 10px;
+	border-width: 0px;
+	font-family: WoW2;
+	font-size: 25px;
+	outline: none;
+	transition: .3s;
+	box-shadow: 0 8px 15px rgba(0,0,0,.1);
+	height: 50px;
+	width: 150px;
+	margin-left: 130px;
+	/*top: 30px;*/
+	/*left: 450px;*/
+	color: #D89B41;
+	background-color: #416678;
+	cursor: pointer;
+}
+
+#loginReference:hover {
+	background-color: #D89B41;
+	color: #416678;
+	/*transform: translateY(-7px);*/
+	/*box-shadow: 0 15px 20px rgba(128,153,165,.9);*/
+}
+
+#loginDiv {
+	display: flex;
+	flex-direction: column;
+	width: 500px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+#loginInfo {
+	font-family: "Comic Sans MS";
+	color: #416678;
+}
+
+#logoutButton {
+	margin-left: 85px;
+	/*margin-top: 10px;*/
+	font-family: "Comic Sans MS";
+	font-size: 20px;
+	font-weight: bold;
+	width: 100px;
+	height: 35px;
+	border-radius: 10px;
+	border-width: 0px;
+	outline: none;
+	background-color: #436677;
+	color: #D89B41;
+	cursor: pointer;
+}
+
+#logoutButton:hover {
+	background-color: #D89B41;
+	color: #436677;
+}
+
+#loginHello {
+	color: #416678;
+	font-family: "Comic Sans MS";
+	margin-left: 50px;
 }
 
 .mainMenu {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	margin-top: 10px;
 
 }
 
-.mainMenuList {
+#mainMenuList {
 	display: flex;
 	/*flex-direction: center;*/
 	justify-content: center;
@@ -45,20 +126,22 @@ a {
 	white-space: nowrap;
 
 
+
 }
 
-.mainMenuList li {
+#mainMenuList li {
 
 	display : flex;
 	justify-content: center;
 	text-align: center;
-	/*margin-left: 10px;*/
-	margin-right: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
 	padding: 5px;
 	font-family: WoW2;
 	font-size: 30px;
 	color: #416678;
 	border-radius: 5px;
+
 
 }
 
@@ -67,15 +150,15 @@ a {
 	vertical-align: center;
 }
 
-.mainMenuList li a:visited {
+#mainMenuList li a:visited {
 	color: #416678;
 }
 
-.mainMenuList li:hover {
+#mainMenuList li:hover {
 	background-color: #416678;
 }
 
-.mainMenuList li:hover a{
+#mainMenuList li:hover a{
 	color: #D89B41;
 }
 
@@ -88,19 +171,14 @@ a {
 }
 
 #myCollectionReference {
-	padding-top: 35px;
+	/*padding-top: 35px;*/
 }
- 
-
-
-
-
 
 
 #containerDatabase {
 	display: flex;
 
-	/*justify-content: center;*/
+	justify-content: center;
 	width: 1400px;
 	margin-left: 20px;
 
@@ -117,7 +195,7 @@ a {
 }
 
 #leftMenuTitleDatabase {
-	margin-left: 10px;
+	/*margin-left: 5px;*/
 	color: #416678;
 	font-family: WoW2;
 }
@@ -201,11 +279,19 @@ a {
 #filterButton {
 	margin-left: 100px;
 	font-family: "Comic Sans MS";
+	width: 50px;
+	height: 25px;
 	border-radius: 10px;
-	border-width: 1px;
+	border-width: 0px;
 	outline: none;
 	background-color: #436677;
 	color: #D89B41;
+	cursor: pointer;
+}
+
+#filterButton:hover {
+	background-color: #D89B41;
+	color: #436677;
 }
 
 #resultTable {
@@ -280,6 +366,52 @@ a {
 	color: #416678;
 	font-family: "Comic Sans MS"
 }
+
+.back_to_top {
+	position: fixed;
+	bottom: 80px;
+	right: 40px;
+	z-index: 9999;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	font-size: 30px;
+	line-height: 45px;
+	background-image: url("background2.png");
+	/*background: #416678;*/
+	color: #416678;
+	cursor: pointer;
+	border-radius: 15px;
+	display: none;
+}
+
+.back_to_top:hover {
+	/*background: #D89B41;*/
+	color: #D89B41;
+}
+
+.back_to_top-show {
+	display: block;
+}
+
+footer {
+	/*display: flex;*/
+	/*justify-content: right;*/
+	font-family: "Comic Sans MS";
+	color: #416678;
+	height: 50px;
+	text-align: right;
+	background-image: url("background2.png");
+	/*filter: brightness(75%);*/
+	padding-right: 20px;
+	margin-top: 85px;
+}
+
+
+
+
+
+
 
 
 

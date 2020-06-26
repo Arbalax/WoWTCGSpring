@@ -22,7 +22,7 @@ public class CollectionDAO {
 
     public void addCard () {
 
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction = null;
@@ -35,15 +35,15 @@ public class CollectionDAO {
         session.save(myCollection);
 
 
-            session.getTransaction().commit();
+        session.getTransaction().commit();
 
-            sessionFactory.close();
+        sessionFactory.close();
 
     }
 
     public void deleteCard () {
 
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
 
         session.beginTransaction();

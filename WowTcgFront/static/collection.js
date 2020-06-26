@@ -1,9 +1,3 @@
-let cardId;
-let savedCustomerId;
-let savedName;
-let customerIdFromCookies;
-let customerNameFromCookies;
-
 function getCookie(name) {
 	let cookie = {};
 	document.cookie.split(';').forEach(function(el) {
@@ -13,51 +7,9 @@ function getCookie(name) {
 	return cookie[name];
 }
 
+let customerIdFromCookies = getCookie('CustomerId');
 
-window.onload = function checkAuth (){
-	customerIdFromCookies = getCookie('CustomerId');
-	if (customerIdFromCookies > 0) {
-		let mainMenu = document.getElementById('mainMenuList');
-		let myCollectionLink = document.createElement('li');
-		myCollectionLink.id = "myCollectionReference";
-		myCollectionLink.innerHTML = "<a href = 'collection.html'> My_collection </a>";
-		mainMenu.append(myCollectionLink);
-
-		customerNameFromCookies = getCookie('CustomerName');
-		let trimName = customerNameFromCookies.replace(/'/g, '');
-		let loginDiv = document.getElementById('loginDiv');
-		loginDiv.innerHTML = "<h2 id = 'loginHello'>Hello, " + trimName + "</h2>";
-
-		let logout = document.createElement('div');
-		logout.id = "logoutDiv";
-		logout.innerHTML = "<p><input id='logoutButton' type='button' value='Log Out'></p>";
-		loginDiv.append(logout);
-
-		logout.addEventListener('click', async function logout(event) {
-		document.cookie = "CustomerId=; Max-Age=0;";
-		document.cookie = "CustomerName=; Max-Age=0;";
-		location.reload();
-
-		});
-	};
-};
-
-// loginReference.onclick = function () { window.open('login.html'); }
-loginReference.onclick = function () { window.location = 'login.html'; }
-
-
-
-
- targetQuery = async function query () {
-
-	// const resultTable = document.getElementById('resultTable');
-	// const children = resultTable.children;
-	// for (let i = 0; i < children.length; i++) {
-	// 	const child = children[i];
-	// 	document.getElementById('resultTable').removeChild(child);
-	// }
-
-
+let cardQuery = async function query() {
 
 	let setNameIndex = document.getElementById("SetName").options.selectedIndex;
 	let setNameValue= document.getElementById("SetName").options[setNameIndex].value;
@@ -86,8 +38,9 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 		cost: costValue,
 		faction: factionValue,
 		rarity: rarityValue,
+		customerId: customerIdFromCookies,
 	};
-	let response = await fetch ('http://127.0.0.1:8080/WowTCGWebserver/', {
+	let response = await fetch ('http://127.0.0.1:8080/MyCollection/', {
 		
 		method: 'POST',
 		
@@ -113,11 +66,11 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 	let resultCard = result;
 	// let resultCard = JSON.parse(result);
-	console.log(resultCard);
+	// console.log(resultCard);
 
 	if (Object.keys(resultCard).length == 0) {
 
-		document.getElementById('resultTable').innerHTML = '<p id = "notFoundText"> Cards with selected parameters not found<br/>Change the request parameters and try again </p>';
+		document.getElementById('resultTable').innerHTML = '<p id = "notFoundTextCollection"> Cards not found<br/>Change the request parameters or add cards and try again </p>';
 		// document.getElementById('resultTable').innerHTML = '<p id = "notFoundText2"> Change the request parameters and try again </p>';
 	}
 
@@ -129,7 +82,7 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 		if (typeof resultCard[key].cardName !== 'undefined') {
 
-			cardId = resultCard[key].cardId;
+
 
 			let resultTable = document.getElementById('resultTable');
 
@@ -138,37 +91,30 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 			resultTable.append(createdOverallDiv);
 
-			if (customerIdFromCookies > 0) {
-				let createdButtonsDiv = document.createElement('div');
-				createdButtonsDiv.className = "createdButtonsDiv";
+			let createdButtonsDiv = document.createElement('div');
+			createdButtonsDiv.className = "createdButtonsDiv";
 
-				createdOverallDiv.append(createdButtonsDiv);
+			createdOverallDiv.append(createdButtonsDiv);
 
-				let createdButtonAddDiv = document.createElement('div');
-				createdButtonAddDiv.className = "createdButtonAddDiv";
-				createdButtonAddDiv.innerHTML = "<p><input id='addButton' type='button' value='+'></p>";
+			let createdButtonDeleteDiv = document.createElement('div');
+			createdButtonDeleteDiv.className = "createdButtonDeleteDiv";
+			createdButtonDeleteDiv.innerHTML = "<p><input id='deleteButton' type='button' value='-'></p>";
 
-				createdButtonsDiv.append(createdButtonAddDiv);
+			createdButtonsDiv.append(createdButtonDeleteDiv);
 
-				createdButtonAddDiv.addEventListener('click', async function addCard (event) {
-					alert('"'+resultCard[key].cardName + '" has been added to your collection.');
+			createdButtonDeleteDiv.addEventListener('click', async function deleteCard (event) {
 
-					function getCookie(name) {
-						let cookie = {};
-						document.cookie.split(';').forEach(function(el) {
-							let [k,v] = el.split('=');
-							cookie[k.trim()] = v;
-						})
-						return cookie[name];
-					}
+				if (window.confirm('Are you sure you want to delete "'+resultCard[key].cardName+'" from your collection?')) {
+					alert('"' + resultCard[key].cardName + '" has been deleted from your collection.');
 
-					let customerIdFromCookies = getCookie('CustomerId');
 
-					let cardAdd = {
+
+					console.log(customerIdFromCookies);
+					let cardDelete = {
 						customerId: customerIdFromCookies,
 						cardId: resultCard[key].cardId,
 					};
-					let addResponse = await fetch ('http://127.0.0.1:8080/addcard/', {
+					let deleteResponse = await fetch('http://127.0.0.1:8080/deletecard/', {
 
 						method: 'POST',
 
@@ -179,29 +125,20 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 							'Access-Control-Request-Method': 'POST',
 							'Access-Control-Request-Headers': 'Content-Type',
 						},
-						body: JSON.stringify(cardAdd)
+						body: JSON.stringify(cardDelete)
 					});
-					console.log(JSON.stringify(cardAdd));
+					console.log(JSON.stringify(cardDelete));
 					// alert (JSON.stringify(properties));
 
 
-					// let addResult = await addResponse.json();
-					// console.log(addResult);
-				});
+					await query();
 
-				// createdButtonAddDiv.addEventListener('click', {
-				//     handleEvent: function (event) {
-				//     alert('Событие вызвал handleEvent');
-				//     }
-				//
-				// });
+				} else {
 
-
-				// document.getElementById('addButton').addEventListener('click', console.log(resultCard[key].cardName));
-			}
-
-
-
+				}
+				// let deleteResult = await deleteResponse.json();
+				// console.log(deleteResult);
+			});
 
 			let createdImageDiv = document.createElement('div');
 			createdImageDiv.className = "createdImageDiv";
@@ -307,44 +244,10 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 	};
 
 };
-
-filterButton.onclick = targetQuery;
-
-(function() {
-	'use strict';
-
-	function trackScroll() {
-		let scrolled = window.pageYOffset;
-		let coords = document.documentElement.clientHeight;
-
-		if (scrolled > coords) {
-			goTopBtn.classList.add('back_to_top-show');
-		}
-		if (scrolled < coords) {
-			goTopBtn.classList.remove('back_to_top-show');
-		}
-	}
-
-	function backToTop() {
-		if (window.pageYOffset > 0) {
-			window.scrollBy(0, -320);
-			setTimeout(backToTop, 0);
-		}
-	}
-
-	let goTopBtn = document.querySelector('.back_to_top');
-
-	window.addEventListener('scroll', trackScroll);
-	goTopBtn.addEventListener('click', backToTop);
-})();
-
-// window.addEventListener('focus',  function() {
-// 	location.reload();
-// });
-
-
-
-
+filterButton.onclick = cardQuery;
+window.onload = function start (){
+	cardQuery();
+};
 
 
 

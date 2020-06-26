@@ -1,0 +1,144 @@
+@font-face {
+
+    font-family: WoW2;
+    src: url(WoW-plexus.ttf);
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /*align-items: center;*/
+    /* background-color : #231A13; */
+    /*background-color : #ffffff;*/
+    /*background-color : #416678;*/
+    background-image: url("background.gif");
+    /*height: 300px;*/
+}
+
+#mainTitle {
+    display: flex;
+    text-align: center;
+    font-family: WoW2;
+    justify-content: center;
+    color: #C25E28;
+}
+
+#mainTitle a:visited {
+    color: #C25E28;
+}
+
+#loginContainer {
+
+    display: flex;
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#authorization {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+/*#logForm {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*}*/
+
+.authField {
+    display: flex;
+    width: 400px;
+    height: 30px;
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    color: #416678;
+}
+
+#logInButton {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    font-weight: bold;
+    color: #416678;
+    border-radius: 25px;
+    border-width: 0px;
+    outline: none;
+    background-color: #D89B41;
+    cursor: pointer;
+    margin-left: 100px;
+    margin-top: 10px;
+    transition: .3s;
+}
+
+#logInButton:hover {
+    color: #D89B41;
+    background-color: #416678;
+}
+
+#createdLoginWarning {
+    display: flex;
+    font-size: 20px;
+    font-family: 'Comic Sans MS';
+    color: #FD1A0C;
+    margin-left: 75px;
+}
+
+#accountQuestion {
+    display: flex;
+    justify-content: center;
+    font-family: "Comic Sans MS";
+    color: #416678;
+    margin-top: 50px;
+}
+
+#signUpContainer {
+
+    display: flex;
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#registration {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+#signUpButton {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    font-weight: bold;
+    color: #416678;
+    border-radius: 25px;
+    border-width: 0px;
+    outline: none;
+    background-color: #D89B41;
+    cursor: pointer;
+    margin-left: 100px;
+    margin-top: 10px;
+    transition: .3s;
+}
+
+#signUpButton:hover {
+    color: #D89B41;
+    background-color: #416678;
+}
