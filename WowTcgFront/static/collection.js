@@ -30,7 +30,6 @@ let cardQuery = async function query() {
 	let rarityValue= document.getElementById("Rarity").options[rarityIndex].value;
 
 
-
 	let properties = {
 		setName: setNameValue,
 		cardClass: setClassValue,
@@ -54,7 +53,6 @@ let cardQuery = async function query() {
 		body: JSON.stringify(properties)
 	});
 	console.log(JSON.stringify(properties));
-	// alert (JSON.stringify(properties));
 
 	
 	let result = await response.json();
@@ -63,26 +61,20 @@ let cardQuery = async function query() {
 	document.getElementById('resultTable').innerHTML = "";
 
 
-
 	let resultCard = result;
-	// let resultCard = JSON.parse(result);
-	// console.log(resultCard);
 
 	if (Object.keys(resultCard).length == 0) {
 
-		document.getElementById('resultTable').innerHTML = '<p id = "notFoundTextCollection"> Cards not found<br/>Change the request parameters or add cards and try again </p>';
-		// document.getElementById('resultTable').innerHTML = '<p id = "notFoundText2"> Change the request parameters and try again </p>';
+		let resultTable = document.getElementById('resultTable');
+		let notFound = document.createElement('div');
+		notFound.id = "notFoundDiv";
+		notFound.innerHTML = '<h1 class = "notFoundText">Cards not found</h1><br/><h1 class = "notFoundText">Change the request parameters or add cards and try again</h1>';
+		resultTable.append(notFound);
 	}
 
-
-
-
-	// let card ='';
 	for (let key in resultCard) {
 
 		if (typeof resultCard[key].cardName !== 'undefined') {
-
-
 
 			let resultTable = document.getElementById('resultTable');
 
@@ -98,16 +90,14 @@ let cardQuery = async function query() {
 
 			let createdButtonDeleteDiv = document.createElement('div');
 			createdButtonDeleteDiv.className = "createdButtonDeleteDiv";
-			createdButtonDeleteDiv.innerHTML = "<p><input id='deleteButton' type='button' value='-'></p>";
+			createdButtonDeleteDiv.innerHTML = "<p><input class='resultButton' type='button' value='-' title='Delete from your collection'></p>";
 
 			createdButtonsDiv.append(createdButtonDeleteDiv);
 
 			createdButtonDeleteDiv.addEventListener('click', async function deleteCard (event) {
 
-				if (window.confirm('Are you sure you want to delete "'+resultCard[key].cardName+'" from your collection?')) {
-					alert('"' + resultCard[key].cardName + '" has been deleted from your collection.');
-
-
+				// if (window.confirm('Are you sure you want to delete "'+resultCard[key].cardName+'" from your collection?')) {
+					// alert('"' + resultCard[key].cardName + '" has been deleted from your collection.');
 
 					console.log(customerIdFromCookies);
 					let cardDelete = {
@@ -130,12 +120,18 @@ let cardQuery = async function query() {
 					console.log(JSON.stringify(cardDelete));
 					// alert (JSON.stringify(properties));
 
+					let deleteResult = await deleteResponse.status;
+
+					if (deleteResult == 200) {
+						document.getElementById('message').innerHTML = '"'+resultCard[key].cardName + '" has been deleted from your collection';
+						getPopUp();
+					}
 
 					await query();
 
-				} else {
+				// } else {
 
-				}
+				// }
 				// let deleteResult = await deleteResponse.json();
 				// console.log(deleteResult);
 			});
@@ -144,11 +140,7 @@ let cardQuery = async function query() {
 			createdImageDiv.className = "createdImageDiv";
 			createdImageDiv.innerHTML = "<a target='_blank' href = " + resultCard[key].imageFullUrl + " ><img class = 'modalImage' src= " + resultCard[key].imageUrl + " alt='image'></a>";
 
-
-
 			createdOverallDiv.append(createdImageDiv);
-
-
 
 			let createdNameDiv = document.createElement('div');
 			createdNameDiv.className = "createdParameters";
@@ -235,21 +227,58 @@ let cardQuery = async function query() {
 
 			let resultResponse = resultCardName + resultSetName + resultNumberInSet + resultRarity + resultType + resultFaction +  resultClass + resultRace + resultAllyClass + resultCost + resultHealth + resultAttack + resultAttackType + resultStrikeCost + resultDefence;
 
-
 			createdNameDiv.innerHTML = resultResponse;
 			createdOverallDiv.append(createdNameDiv);
-
 
 		};
 	};
 
 };
 filterButton.onclick = cardQuery;
+
 window.onload = function start (){
+
+	customerNameFromCookies = getCookie('CustomerName');
+	let trimName = customerNameFromCookies.replace(/'/g, '');
+	let title = document.getElementById('topTitleCollection');
+	title.innerHTML = "<h2 id = 'topTitleCollection' align='center'> "+trimName+"&#39;s Collection </h2>";
+
 	cardQuery();
+
 };
 
+(function() {
+	'use strict';
 
+	function trackScroll() {
+		let scrolled = window.pageYOffset;
+		let coords = document.documentElement.clientHeight;
+
+		if (scrolled > coords) {
+			goTopBtn.classList.add('back_to_top-show');
+		}
+		if (scrolled < coords) {
+			goTopBtn.classList.remove('back_to_top-show');
+		}
+	}
+
+	function backToTop() {
+		if (window.pageYOffset > 0) {
+			window.scrollBy(0, -320);
+			setTimeout(backToTop, 0);
+		}
+	}
+
+	let goTopBtn = document.querySelector('.back_to_top');
+
+	window.addEventListener('scroll', trackScroll);
+	goTopBtn.addEventListener('click', backToTop);
+})();
+
+function getPopUp() {
+	jQuery('#success-message').show();
+	setTimeout(function() { $("#success-message").fadeOut('slow'); }, 1000);
+}
 
 
 

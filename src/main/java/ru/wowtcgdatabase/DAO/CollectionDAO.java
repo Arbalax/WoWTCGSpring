@@ -73,4 +73,18 @@ public class CollectionDAO {
         sessionFactory.close();
 
     }
+
+    public List getCard () {
+        sessionFactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        List getCardResponse;
+        session.beginTransaction();
+        MyCollection myCollection = new MyCollection();
+        myCollection.setCustomerId(collectionRequest.getCustomerId());
+        myCollection.setCardId(collectionRequest.getCardId());
+        getCardResponse = session.createQuery( "from MyCollection collection where collection.customerId = "+ myCollection.getCustomerId() +" and collection.cardId = "+myCollection.getCardId()+"").list();
+        session.close();
+        sessionFactory.close();
+        return getCardResponse;
+    }
 }

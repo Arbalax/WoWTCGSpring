@@ -13,7 +13,6 @@ function getCookie(name) {
 	return cookie[name];
 }
 
-
 window.onload = function checkAuth (){
 	customerIdFromCookies = getCookie('CustomerId');
 	if (customerIdFromCookies > 0) {
@@ -42,22 +41,9 @@ window.onload = function checkAuth (){
 	};
 };
 
-// loginReference.onclick = function () { window.open('login.html'); }
 loginReference.onclick = function () { window.location = 'login.html'; }
 
-
-
-
  targetQuery = async function query () {
-
-	// const resultTable = document.getElementById('resultTable');
-	// const children = resultTable.children;
-	// for (let i = 0; i < children.length; i++) {
-	// 	const child = children[i];
-	// 	document.getElementById('resultTable').removeChild(child);
-	// }
-
-
 
 	let setNameIndex = document.getElementById("SetName").options.selectedIndex;
 	let setNameValue= document.getElementById("SetName").options[setNameIndex].value;
@@ -76,8 +62,6 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 	let rarityIndex = document.getElementById("Rarity").options.selectedIndex;
 	let rarityValue= document.getElementById("Rarity").options[rarityIndex].value;
-
-
 
 	let properties = {
 		setName: setNameValue,
@@ -101,15 +85,12 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 		body: JSON.stringify(properties)
 	});
 	console.log(JSON.stringify(properties));
-	// alert (JSON.stringify(properties));
 
-	
 	let result = await response.json();
 	console.log(result);
 
+
 	document.getElementById('resultTable').innerHTML = "";
-
-
 
 	let resultCard = result;
 	// let resultCard = JSON.parse(result);
@@ -117,14 +98,13 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 	if (Object.keys(resultCard).length == 0) {
 
-		document.getElementById('resultTable').innerHTML = '<p id = "notFoundText"> Cards with selected parameters not found<br/>Change the request parameters and try again </p>';
-		// document.getElementById('resultTable').innerHTML = '<p id = "notFoundText2"> Change the request parameters and try again </p>';
+		let resultTable = document.getElementById('resultTable');
+		let notFound = document.createElement('div');
+		notFound.id = "notFoundDiv";
+		notFound.innerHTML = '<h1 class = "notFoundText"> Cards with selected parameters not found</h1><br/><h1 class = "notFoundText">Change the request parameters and try again </h1>';
+		resultTable.append(notFound);
 	}
 
-
-
-
-	// let card ='';
 	for (let key in resultCard) {
 
 		if (typeof resultCard[key].cardName !== 'undefined') {
@@ -146,12 +126,11 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 				let createdButtonAddDiv = document.createElement('div');
 				createdButtonAddDiv.className = "createdButtonAddDiv";
-				createdButtonAddDiv.innerHTML = "<p><input id='addButton' type='button' value='+'></p>";
+				createdButtonAddDiv.innerHTML = "<p><input class='resultButton' type='button' value='+' title = 'Add to your collection'></p>";
 
 				createdButtonsDiv.append(createdButtonAddDiv);
 
 				createdButtonAddDiv.addEventListener('click', async function addCard (event) {
-					alert('"'+resultCard[key].cardName + '" has been added to your collection.');
 
 					function getCookie(name) {
 						let cookie = {};
@@ -182,36 +161,26 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 						body: JSON.stringify(cardAdd)
 					});
 					console.log(JSON.stringify(cardAdd));
-					// alert (JSON.stringify(properties));
 
+					let addResult = await addResponse.status;
 
-					// let addResult = await addResponse.json();
-					// console.log(addResult);
+					if (addResult == 200) {
+						document.getElementById('message').innerHTML = '"'+resultCard[key].cardName + '" has been added to your collection';
+						getPopUp();
+					} else {
+						if (addResult != 200) {
+							document.getElementById('message').innerHTML = '"'+resultCard[key].cardName + '" is already in your collection';
+							getPopUp();
+						}
+					}
 				});
-
-				// createdButtonAddDiv.addEventListener('click', {
-				//     handleEvent: function (event) {
-				//     alert('Событие вызвал handleEvent');
-				//     }
-				//
-				// });
-
-
-				// document.getElementById('addButton').addEventListener('click', console.log(resultCard[key].cardName));
 			}
-
-
-
 
 			let createdImageDiv = document.createElement('div');
 			createdImageDiv.className = "createdImageDiv";
 			createdImageDiv.innerHTML = "<a target='_blank' href = " + resultCard[key].imageFullUrl + " ><img class = 'modalImage' src= " + resultCard[key].imageUrl + " alt='image'></a>";
 
-
-
 			createdOverallDiv.append(createdImageDiv);
-
-
 
 			let createdNameDiv = document.createElement('div');
 			createdNameDiv.className = "createdParameters";
@@ -298,14 +267,11 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 			let resultResponse = resultCardName + resultSetName + resultNumberInSet + resultRarity + resultType + resultFaction +  resultClass + resultRace + resultAllyClass + resultCost + resultHealth + resultAttack + resultAttackType + resultStrikeCost + resultDefence;
 
-
 			createdNameDiv.innerHTML = resultResponse;
 			createdOverallDiv.append(createdNameDiv);
 
-
 		};
 	};
-
 };
 
 filterButton.onclick = targetQuery;
@@ -338,9 +304,10 @@ filterButton.onclick = targetQuery;
 	goTopBtn.addEventListener('click', backToTop);
 })();
 
-// window.addEventListener('focus',  function() {
-// 	location.reload();
-// });
+function getPopUp() {
+	jQuery('#success-message').show();
+	setTimeout(function() { $("#success-message").fadeOut('slow'); }, 1000);
+}
 
 
 

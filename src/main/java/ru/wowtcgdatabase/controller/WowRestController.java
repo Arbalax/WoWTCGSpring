@@ -99,7 +99,7 @@ public class WowRestController {
     }
 
     @PostMapping("/addcard")
-    public ResponseEntity <String> addCard(@RequestBody CollectionRequest requestBody) {
+    public ResponseEntity <String> addCard(@RequestBody CollectionRequest requestBody) throws JsonProcessingException {
 
         CollectionRequest collectionRequest = new CollectionRequest();
         collectionRequest.setCardId(requestBody.getCardId());
@@ -109,11 +109,19 @@ public class WowRestController {
                 " Customer Id: " + collectionRequest.getCustomerId());
 
         CollectionDAO collectionDAO = new CollectionDAO(collectionRequest);
-        collectionDAO.addCard();
+        List check = collectionDAO.getCard();
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writer().writeValueAsString(check);
+        System.out.println(json);
 
+        if (json.equals("[]")) {
+            collectionDAO.addCard();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/deletecard")

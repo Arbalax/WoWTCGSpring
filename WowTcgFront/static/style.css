@@ -1,24 +1,13 @@
 @font-face {
-	
 	font-family: WoW2;
 	src: url(WoW-plexus.ttf);
 }
 
-@font-face {
-	font-family: WoW;
-	src: url(Font.ttf);
-}
-	
 body {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-
-	/* background-color : #231A13; */
-	/*background-color : #ffffff;*/
-	/*background-color : #416678;*/
 	background-image: url("background.gif");
-
 }
 
 a {
@@ -27,35 +16,67 @@ a {
 
 #topMenu {
 	display: flex;
-	flex-direction: row;
-	/*justify-content: center;*/
+	justify-content: center;
 }
 
-#topTitle {
+#topTitleDiv {
 	display: flex;
-	font-family: WoW2;
+	flex-direction: column;
+}
+
+.topTitle {
+	display: flex;
+	justify-content: center;
+	font-family: WoW2, cursive;
 	color: #C25E28;
-	margin-left: 20px;
+	padding-right: 350px;
 }
 
 #topTitleCollection{
-	font-family: WoW2;
+	font-family: "Comic Sans MS", cursive;
 	color: #C25E28;
 }
 
+#loginDiv {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 400px;
+}
+
+#loginInfo {
+	display: flex;
+	justify-content: center;
+	font-family: "Comic Sans MS", cursive;
+	color: #416678;
+	margin-bottom: 0;
+}
+
+#loginInfo2 {
+	display: flex;
+	justify-content: center;
+	font-family: "Comic Sans MS", cursive;
+	color: #416678;
+	margin-top: 0;
+}
+
+#loginButtonDiv {
+	display: flex;
+	justify-content: center;
+}
+
 #loginReference {
+	display: flex;
+	justify-content: center;
 	border-radius: 10px;
-	border-width: 0px;
-	font-family: WoW2;
+	border-width: 0;
+	font-family: WoW2, cursive;
 	font-size: 25px;
 	outline: none;
 	transition: .3s;
 	box-shadow: 0 8px 15px rgba(0,0,0,.1);
 	height: 50px;
 	width: 150px;
-	margin-left: 130px;
-	/*top: 30px;*/
-	/*left: 450px;*/
 	color: #D89B41;
 	background-color: #416678;
 	cursor: pointer;
@@ -68,29 +89,21 @@ a {
 	/*box-shadow: 0 15px 20px rgba(128,153,165,.9);*/
 }
 
-#loginDiv {
+#logoutDiv {
 	display: flex;
-	flex-direction: column;
-	width: 500px;
-	margin-top: 20px;
-	margin-left: 20px;
-}
-
-#loginInfo {
-	font-family: "Comic Sans MS";
-	color: #416678;
+	justify-content: center;
 }
 
 #logoutButton {
-	margin-left: 85px;
-	/*margin-top: 10px;*/
-	font-family: "Comic Sans MS";
+	display: flex;
+	justify-content: center;
+	font-family: "Comic Sans MS", cursive;
 	font-size: 20px;
 	font-weight: bold;
 	width: 100px;
 	height: 35px;
 	border-radius: 10px;
-	border-width: 0px;
+	border-width: 0;
 	outline: none;
 	background-color: #436677;
 	color: #D89B41;
@@ -103,9 +116,11 @@ a {
 }
 
 #loginHello {
+	display: flex;
+	justify-content: center;
 	color: #416678;
-	font-family: "Comic Sans MS";
-	margin-left: 50px;
+	font-family: "Comic Sans MS", cursive;
+	margin-bottom: 0;
 }
 
 .mainMenu {
@@ -113,36 +128,27 @@ a {
 	flex-direction: row;
 	justify-content: center;
 	margin-top: 10px;
-
 }
 
 #mainMenuList {
 	display: flex;
-	/*flex-direction: center;*/
 	justify-content: center;
 	list-style: none;
-	/*margin: 0;
-    padding: 0;*/
 	white-space: nowrap;
-
-
-
 }
 
 #mainMenuList li {
-
 	display : flex;
 	justify-content: center;
 	text-align: center;
 	margin-left: 50px;
 	margin-right: 50px;
 	padding: 5px;
-	font-family: WoW2;
+	font-family: WoW2, cursive;
 	font-size: 30px;
 	color: #416678;
 	border-radius: 5px;
-
-
+	/*border: solid #416678;*/
 }
 
 #myCollection {
@@ -167,49 +173,51 @@ a {
 }
 
 #later {
-	font-family: "Comic Sans MS";
+	font-family: "Comic Sans MS", cursive;
 }
 
 #myCollectionReference {
 	/*padding-top: 35px;*/
 }
 
-
 #containerDatabase {
 	display: flex;
-
 	justify-content: center;
-	width: 1400px;
-	margin-left: 20px;
-
-;
-
-	/*margin: 0 auto;*/
 }
 
 #leftMenuDatabase {
 	display: flex;
+	align-self: flex-start;
 	flex-direction: column;
+	justify-content: center;
 	width: 200px;
-
+	align-items: center;
 }
 
 #leftMenuTitleDatabase {
-	/*margin-left: 5px;*/
+	display: flex;
+	justify-content: center;
 	color: #416678;
-	font-family: WoW2;
+	font-family: WoW2, cursive;
+}
+
+#filtersDiv {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .selectFilter {
 	display: flex;
 	width: 150px;
 	/*background-image: url("background.gif");*/
-	font-family: "Comic Sans MS";
+	font-family: "Comic Sans MS", cursive;
 	background-color: #436677;
 	color: #D89B41;
 	border-radius: 5px;
 	outline: none;
-
+	margin-bottom: 10px;
 }
 
 .optionFilter {
@@ -277,12 +285,13 @@ a {
 }
 
 #filterButton {
-	margin-left: 100px;
-	font-family: "Comic Sans MS";
+	display: flex;
+	justify-content: center;
+	font-family: "Comic Sans MS", cursive;
 	width: 50px;
 	height: 25px;
 	border-radius: 10px;
-	border-width: 0px;
+	border-width: 0;
 	outline: none;
 	background-color: #436677;
 	color: #D89B41;
@@ -295,98 +304,135 @@ a {
 }
 
 #resultTable {
-	width: 1150px;
+	width: 1050px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-
-
 	border: solid #416678;
-	/*background-color: #416678;*/
 	background-image: url("background2.png");
+	margin-left: 10px;
+}
 
+#resultTableStart {
+	display: flex;
+	width: 1050px;
+	justify-content: center;
+	flex-direction: column;
+	align-self: center;
 }
 
 #startText1 {
-	font-family: WoW2;
+	display: flex;
+	justify-content: center;
+	font-family: WoW2, cursive;
 	color: #416678;
-	margin-left: 180px;
-	margin-top: 60px;
+	margin-bottom: 50px;
 }
 
 #startText2 {
-	font-family: WoW2;
+	display: flex;
+	justify-content: center;
+	font-family: WoW2, cursive;
 	color: #416678;
-	margin-left: 310px;
 }
 
-#notFoundText {
-	font-family: "Comic Sans MS";
-	text-align: center;
-	margin-left: 260px;
-	margin-top: 50px;
+#notFoundDiv {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 1050px;
+}
+
+.notFoundText {
+	display: flex;
+	justify-content: center;
+	font-family: "Comic Sans MS", cursive;
 	font-size: 30px;
-	line-height: 75px;
 	color: #416678;
+	margin-bottom: 30px;
 }
 
 #notFoundTextCollection {
-	font-family: "Comic Sans MS";
+	display: flex;
+	font-family: "Comic Sans MS", cursive;
 	text-align: center;
-	margin-left: 165px;
-	margin-top: 50px;
 	font-size: 30px;
-	line-height: 75px;
 	color: #416678;
 }
 
 .createdOverallDiv {
 	display: flex;
 	margin: 10px;
-	display: flex;
-	width: 550px;
-	height: 350px;
+	width: 500px;
+	height: 320px;
 }
 
 .createdParameters {
 	font-size: 17px;
 	margin-left: 10px;
 	color: #416678;
+}
 
+.createdButtonAddDiv {
+	margin-top: -15px;
+}
+
+.resultButton {
+	width: 30px;
+	height: 30px;
+	margin-right: 5px;
+	border-radius: 5px;
+	border-width: 0;
+	background-color: #416678;
+	color: #D89B41;
+	font-family: "Comic Sans MS", cursive;
+	outline: none;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.resultButton:hover {
+	background-color: #D89B41;
+	color: #416678;
+}
+
+.createdButtonDeleteDiv {
+	margin-top: -15px;
 }
 
 .parametersName {
 	font-weight: bold;
 	color: #6E4277;
-	font-family: "Comic Sans MS";
+	font-family: "Comic Sans MS", cursive;
 }
 
 .parametersValue {
 	font-weight: bold;
 	color: #416678;
-	font-family: "Comic Sans MS"
+	font-family: "Comic Sans MS", cursive;
 }
 
 .back_to_top {
 	position: fixed;
-	bottom: 80px;
+	bottom: 40px;
 	right: 40px;
 	z-index: 9999;
 	width: 50px;
 	height: 50px;
 	text-align: center;
 	font-size: 30px;
+	font-weight: bold;
 	line-height: 45px;
 	background-image: url("background2.png");
-	/*background: #416678;*/
 	color: #416678;
 	cursor: pointer;
 	border-radius: 15px;
 	display: none;
+	filter: brightness(90%);
+	border: solid #416678;
 }
 
 .back_to_top:hover {
-	/*background: #D89B41;*/
 	color: #D89B41;
 }
 
@@ -394,17 +440,47 @@ a {
 	display: block;
 }
 
+.popup {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	text-align: center;
+	left: 20px;
+	bottom: 40px;
+	width: 180px;
+	height: 100px;
+	background-image: url("background2.png");
+	border-radius: 10px;
+	color: #416678;
+	font-family: "Comic Sans MS", cursive;
+	/*transition: 0.3s;*/
+	filter: brightness(90%);
+	border: solid #416678;
+}
+#success-message {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	/*background: rgba(0, 0, 0, 0.56);*/
+	z-index: 999!important;
+	/*background: rgba(40, 69, 113, 0.4);*/
+}
+#success-message {
+	display: none;
+}
+
 footer {
-	/*display: flex;*/
-	/*justify-content: right;*/
-	font-family: "Comic Sans MS";
+	display: flex;
+	justify-content: center;
+	font-family: "Comic Sans MS", cursive;
 	color: #416678;
 	height: 50px;
-	text-align: right;
 	background-image: url("background2.png");
 	/*filter: brightness(75%);*/
-	padding-right: 20px;
-	margin-top: 85px;
+	margin-top: 120px;
 }
 
 
