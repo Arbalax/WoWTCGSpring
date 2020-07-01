@@ -25,7 +25,7 @@ window.onload = function checkAuth (){
 		customerNameFromCookies = getCookie('CustomerName');
 		let trimName = customerNameFromCookies.replace(/'/g, '');
 		let loginDiv = document.getElementById('loginDiv');
-		loginDiv.innerHTML = "<h2 id = 'loginHello'>Hello, " + trimName + "</h2>";
+		loginDiv.innerHTML = "<h2>Hello, " + trimName + "</h2>";
 
 		let logout = document.createElement('div');
 		logout.id = "logoutDiv";
@@ -71,14 +71,14 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 		faction: factionValue,
 		rarity: rarityValue,
 	};
-	let response = await fetch ('http://127.0.0.1:8080/WowTCGWebserver/', {
-		
+	let response = await fetch ('http://192.168.0.110:8080/WowTCGWebserver/', {
+
 		method: 'POST',
-		
+
 		headers: {
 			'Content-Type': 'application/json', // charset=utf-8
 			'Accept': 'application/json',
-			'Origin': 'http://127.0.0.1:8070/',
+			'Origin': 'http://192.168.0.110:80/',
 			'Access-Control-Request-Method': 'POST',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
@@ -91,6 +91,10 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 
 	document.getElementById('resultTable').innerHTML = "";
+	// let resultTable = document.getElementById('resultTable');
+	// let resultDiv = document.createElement("div");
+	// resultDiv.id = "resultDiv";
+	// resultTable.append(resultDiv);
 
 	let resultCard = result;
 	// let resultCard = JSON.parse(result);
@@ -113,6 +117,7 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 			let resultTable = document.getElementById('resultTable');
 
+
 			let createdOverallDiv = document.createElement('div');
 			createdOverallDiv.className = "createdOverallDiv";
 
@@ -126,7 +131,7 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 				let createdButtonAddDiv = document.createElement('div');
 				createdButtonAddDiv.className = "createdButtonAddDiv";
-				createdButtonAddDiv.innerHTML = "<p><input class='resultButton' type='button' value='+' title = 'Add to your collection'></p>";
+				createdButtonAddDiv.innerHTML = "<input class='resultButton' type='button' value='+' title = 'Add to your collection'>";
 
 				createdButtonsDiv.append(createdButtonAddDiv);
 
@@ -147,14 +152,14 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 						customerId: customerIdFromCookies,
 						cardId: resultCard[key].cardId,
 					};
-					let addResponse = await fetch ('http://127.0.0.1:8080/addcard/', {
+					let addResponse = await fetch ('http://192.168.0.110:8080/addcard/', {
 
 						method: 'POST',
 
 						headers: {
 							'Content-Type': 'application/json', // charset=utf-8
 							'Accept': 'application/json',
-							'Origin': 'http://127.0.0.1:8070/',
+							'Origin': 'http://192.168.0.110:80/',
 							'Access-Control-Request-Method': 'POST',
 							'Access-Control-Request-Headers': 'Content-Type',
 						},

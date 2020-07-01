@@ -39,14 +39,14 @@ let cardQuery = async function query() {
 		rarity: rarityValue,
 		customerId: customerIdFromCookies,
 	};
-	let response = await fetch ('http://127.0.0.1:8080/MyCollection/', {
+	let response = await fetch ('http://192.168.0.110:8080/MyCollection/', {
 		
 		method: 'POST',
 		
 		headers: {
 			'Content-Type': 'application/json', // charset=utf-8
 			'Accept': 'application/json',
-			'Origin': 'http://127.0.0.1:8070/',
+			'Origin': 'http://192.168.0.110:80/',
 			'Access-Control-Request-Method': 'POST',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
@@ -104,14 +104,14 @@ let cardQuery = async function query() {
 						customerId: customerIdFromCookies,
 						cardId: resultCard[key].cardId,
 					};
-					let deleteResponse = await fetch('http://127.0.0.1:8080/deletecard/', {
+					let deleteResponse = await fetch('http://192.168.0.110:8080/deletecard/', {
 
 						method: 'POST',
 
 						headers: {
 							'Content-Type': 'application/json', // charset=utf-8
 							'Accept': 'application/json',
-							'Origin': 'http://127.0.0.1:8070/',
+							'Origin': 'http://192.168.0.110:80/',
 							'Access-Control-Request-Method': 'POST',
 							'Access-Control-Request-Headers': 'Content-Type',
 						},
