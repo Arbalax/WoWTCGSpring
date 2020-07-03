@@ -71,14 +71,14 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 		faction: factionValue,
 		rarity: rarityValue,
 	};
-	let response = await fetch ('http://192.168.0.110:8080/WowTCGWebserver/', {
+	let response = await fetch ('http://89.179.245.199:8080/WowTCGWebserver/', {
 
 		method: 'POST',
 
 		headers: {
 			'Content-Type': 'application/json', // charset=utf-8
 			'Accept': 'application/json',
-			'Origin': 'http://192.168.0.110:80/',
+			'Origin': 'http://89.179.245.199:80/',
 			'Access-Control-Request-Method': 'POST',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
@@ -152,14 +152,14 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 						customerId: customerIdFromCookies,
 						cardId: resultCard[key].cardId,
 					};
-					let addResponse = await fetch ('http://192.168.0.110:8080/addcard/', {
+					let addResponse = await fetch ('http://89.179.245.199:8080/addcard/', {
 
 						method: 'POST',
 
 						headers: {
 							'Content-Type': 'application/json', // charset=utf-8
 							'Accept': 'application/json',
-							'Origin': 'http://192.168.0.110:80/',
+							'Origin': 'http://89.179.245.199:80/',
 							'Access-Control-Request-Method': 'POST',
 							'Access-Control-Request-Headers': 'Content-Type',
 						},
