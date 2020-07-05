@@ -16,54 +16,52 @@ import ru.wowtcgdatabase.DAO.CollectionDAO;
 import ru.wowtcgdatabase.DAO.CustomerDAO;
 import ru.wowtcgdatabase.TestHibernate;
 import ru.wowtcgdatabase.model.Card;
+import ru.wowtcgdatabase.model.Customer;
 import ru.wowtcgdatabase.model.MyCollection;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
 @RequestMapping
 public class WowRestController {
+    private ObjectMapper objectMapper = new ObjectMapper();
 
+    @PostMapping("/WowTCGWebserver")
+    public ResponseEntity<String> cards(@RequestBody Request requestBody) throws JsonProcessingException {
 
+        Request request = new Request();
+        request.setSetName(requestBody.getSetName());
+        request.setCardClass(requestBody.getCardClass());
+        request.setType(requestBody.getType());
+        request.setFaction(requestBody.getFaction());
+        request.setRarity(requestBody.getRarity());
+        request.setCost(requestBody.getCost());
 
-        @PostMapping("/WowTCGWebserver")
-        public ResponseEntity <String> cards(@RequestBody Request requestBody) throws JsonProcessingException {
+        System.out.println("Set Name: " + request.getSetName() +
+                " Rarity: " + request.getRarity() +
+                " Type: " + request.getType() +
+                " Faction: " + request.getFaction() +
+                " Class: " + request.getCardClass() +
+                " Cost: " + request.getCost());
 
-            Request request = new Request();
-            request.setSetName(requestBody.getSetName());
-            request.setCardClass(requestBody.getCardClass());
-            request.setType(requestBody.getType());
-            request.setFaction(requestBody.getFaction());
-            request.setRarity(requestBody.getRarity());
-            request.setCost(requestBody.getCost());
-
-            System.out.println("Set Name: " + request.getSetName() +
-                               " Rarity: " + request.getRarity() +
-                               " Type: " + request.getType() +
-                               " Faction: " + request.getFaction() +
-                               " Class: " + request.getCardClass() +
-                               " Cost: " + request.getCost());
-
-            CardsDAO cardsDAO = new CardsDAO(request);
-            List cards = cardsDAO.getCards();
+        CardsDAO cardsDAO = new CardsDAO(request);
+        List cards = cardsDAO.getCards();
 
         System.out.println(cards);
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writer().writeValueAsString(cards);
 
-
-            String json = objectMapper.writer().writeValueAsString(cards);
-
-            System.out.println(json);
-
+        System.out.println(json);
 
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
     @PostMapping("/MyCollection")
-    public ResponseEntity <String> myCollectionCards(@RequestBody Request requestBody) throws JsonProcessingException {
+    public ResponseEntity<List<Card>> myCollectionCards(@RequestBody Request requestBody) throws JsonProcessingException {
 
         Request request = new Request();
         request.setSetName(requestBody.getSetName());
@@ -87,19 +85,16 @@ public class WowRestController {
 
         System.out.println(cards);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-
         String json = objectMapper.writer().writeValueAsString(cards);
 
         System.out.println(json);
 
 
-        return new ResponseEntity<>(json, HttpStatus.OK);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
     }
 
     @PostMapping("/addcard")
-    public ResponseEntity <String> addCard(@RequestBody CollectionRequest requestBody) throws JsonProcessingException {
+    public ResponseEntity<String> addCard(@RequestBody CollectionRequest requestBody) throws JsonProcessingException {
 
         CollectionRequest collectionRequest = new CollectionRequest();
         collectionRequest.setCardId(requestBody.getCardId());
@@ -111,7 +106,6 @@ public class WowRestController {
         CollectionDAO collectionDAO = new CollectionDAO(collectionRequest);
         List check = collectionDAO.getCard();
 
-        ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writer().writeValueAsString(check);
         System.out.println(json);
 
@@ -125,7 +119,7 @@ public class WowRestController {
     }
 
     @PostMapping("/deletecard")
-    public ResponseEntity <String> deleteCard(@RequestBody CollectionRequest requestBody) {
+    public ResponseEntity<String> deleteCard(@RequestBody CollectionRequest requestBody) {
 
         CollectionRequest collectionRequest = new CollectionRequest();
         collectionRequest.setCardId(requestBody.getCardId());
@@ -138,38 +132,29 @@ public class WowRestController {
         collectionDAO.deleteCard();
 
 
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/auth")
-    public ResponseEntity <String> authentication(@RequestBody CustomerRequest requestBody) throws JsonProcessingException {
-
-        CustomerRequest customerRequest = new CustomerRequest();
-        customerRequest.setLogin(requestBody.getLogin());
-        customerRequest.setPassword(requestBody.getPassword());
-
+    public ResponseEntity<Customer> authentication(@RequestBody CustomerRequest customerRequest) throws JsonProcessingException {
         System.out.println("Login: " + customerRequest.getLogin() +
-                " Password: " + customerRequest.getPassword());
+                " Password: " + customerRequest.getPassword() +
+                " Login test: " + customerRequest.getLogin_test());
 
         CustomerDAO customerDAO = new CustomerDAO(customerRequest);
-        List loginResponse = customerDAO.logIn();
+        Optional<Customer> customerOptional = customerDAO.logIn();
 
-        System.out.println(loginResponse);
+        if(customerOptional.isPresent()) {
+            Customer customer = customerOptional.get();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-
-        String json = objectMapper.writer().writeValueAsString(loginResponse);
-
-        System.out.println(json);
-
-
-        return new ResponseEntity<>(json, HttpStatus.OK);
+            return new ResponseEntity<>(customer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 
     @PostMapping("/reg")
-    public ResponseEntity <String> registration(@RequestBody CustomerRequest requestBody) throws JsonProcessingException {
+    public ResponseEntity<String> registration(@RequestBody CustomerRequest requestBody) throws JsonProcessingException {
 
         CustomerRequest customerRequest = new CustomerRequest();
         customerRequest.setLogin(requestBody.getLogin());
@@ -181,13 +166,9 @@ public class WowRestController {
                 " Name: " + customerRequest.getCustomerName());
 
         CustomerDAO customerDAO = new CustomerDAO(customerRequest);
-        List check = customerDAO.logIn();
+        Optional<Customer> customerOptional = customerDAO.logIn();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writer().writeValueAsString(check);
-        System.out.println(json);
-
-        if (json.equals("[]")) {
+        if (!customerOptional.isPresent()) {
             customerDAO.signUp();
             return new ResponseEntity<>(HttpStatus.OK);
         } else {

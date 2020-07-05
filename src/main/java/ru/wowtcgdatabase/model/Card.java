@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity (name = "CardWow")
 @Table (name = "cardswow")
 public class Card {
-
     @Id
 //    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column (name = "CardID")
@@ -232,6 +231,4 @@ public class Card {
                 ", allyClass='" + allyClass + '\'' +
                 '}';
     }
-
-
 }

@@ -37,8 +37,6 @@ public class TestHibernate {
         }
 
         sessionFactory.close();
-
-
     }
 
     public List <Card> listCards() {
@@ -46,8 +44,6 @@ public class TestHibernate {
         Session session = sessionFactory.openSession();
 
         List <Card> cards;
-
-
 
         Transaction transaction = null;
 

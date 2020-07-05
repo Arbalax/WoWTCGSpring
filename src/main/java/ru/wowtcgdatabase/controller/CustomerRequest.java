@@ -3,6 +3,7 @@ package ru.wowtcgdatabase.controller;
 public class CustomerRequest {
 
     private String login;
+    private String login_test;
     private String password;
     private String customerName;
 
@@ -12,6 +13,14 @@ public class CustomerRequest {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getLogin_test() {
+        return login_test;
+    }
+
+    public void setLogin_test(String login_test) {
+        this.login_test = login_test;
     }
 
     public String getPassword() {
