@@ -26,9 +26,7 @@ import java.util.List;
 @RequestMapping
 public class WowRestController {
 
-
-
-        @PostMapping("/WowTCGWebserver")
+        @PostMapping("/getcards")
         public ResponseEntity <String> cards(@RequestBody Request requestBody) throws JsonProcessingException {
 
             Request request = new Request();

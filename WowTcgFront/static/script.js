@@ -71,7 +71,7 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 		faction: factionValue,
 		rarity: rarityValue,
 	};
-	let response = await fetch ('http://89.179.245.199:8080/WowTCGWebserver/', {
+	let response = await fetch ('http://89.179.245.199:8080/getcards/', {
 
 		method: 'POST',
 
