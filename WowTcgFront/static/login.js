@@ -11,6 +11,7 @@ logInButton.onclick = async function login () {
     };
 
     let authResponse = await fetch ('http://89.179.245.199:8080/auth/', {
+    // let authResponse = await fetch ('https://dry-springs-02366.herokuapp.com/auth/', {
 
         method: 'POST',
 

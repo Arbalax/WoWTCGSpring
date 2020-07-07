@@ -72,6 +72,7 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 		rarity: rarityValue,
 	};
 	let response = await fetch ('http://89.179.245.199:8080/getcards/', {
+	// let response = await fetch ('https://dry-springs-02366.herokuapp.com/getcards/', {
 
 		method: 'POST',
 
@@ -152,6 +153,7 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 						customerId: customerIdFromCookies,
 						cardId: resultCard[key].cardId,
 					};
+					// let addResponse = await fetch ('https://dry-springs-02366.herokuapp.com/addcard/', {
 					let addResponse = await fetch ('http://89.179.245.199:8080/addcard/', {
 
 						method: 'POST',
