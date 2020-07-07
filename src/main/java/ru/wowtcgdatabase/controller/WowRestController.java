@@ -26,6 +26,12 @@ import java.util.List;
 @RequestMapping
 public class WowRestController {
 
+    @RequestMapping("/")
+    @ResponseBody
+    String home() {
+        return "Hello World!";
+    }
+
         @PostMapping("/getcards")
         public ResponseEntity <String> cards(@RequestBody Request requestBody) throws JsonProcessingException {
 
