@@ -2,7 +2,7 @@ package ru.wowtcgdatabase.model;
 
 import javax.persistence.*;
 
-@Entity(name = "Customer")
+@Entity
 @Table (name = "customers")
 public class Customer {
 

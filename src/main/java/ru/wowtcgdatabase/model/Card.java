@@ -2,12 +2,11 @@ package ru.wowtcgdatabase.model;
 
 import javax.persistence.*;
 
-@Entity (name = "CardWow")
+@Entity
 @Table (name = "cardswow")
 public class Card {
 
     @Id
-//    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column (name = "CardID")
     private int cardId;
 

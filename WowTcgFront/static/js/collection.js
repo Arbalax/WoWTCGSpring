@@ -1,9 +1,3 @@
-let cardId;
-let savedCustomerId;
-let savedName;
-let customerIdFromCookies;
-let customerNameFromCookies;
-
 function getCookie(name) {
 	let cookie = {};
 	document.cookie.split(';').forEach(function(el) {
@@ -13,37 +7,11 @@ function getCookie(name) {
 	return cookie[name];
 }
 
-window.onload = function checkAuth (){
-	customerIdFromCookies = getCookie('CustomerId');
-	if (customerIdFromCookies > 0) {
-		let mainMenu = document.getElementById('mainMenuList');
-		let myCollectionLink = document.createElement('li');
-		myCollectionLink.id = "myCollectionReference";
-		myCollectionLink.innerHTML = "<a href = 'collection.html'> My_collection </a>";
-		mainMenu.append(myCollectionLink);
+let customerIdFromCookies = getCookie('CustomerId');
 
-		customerNameFromCookies = getCookie('CustomerName');
-		let trimName = customerNameFromCookies.replace(/'/g, '');
-		let loginDiv = document.getElementById('loginDiv');
-		loginDiv.innerHTML = "<h2>Hello, " + trimName + "</h2>";
+let cardQuery = async function query() {
 
-		let logout = document.createElement('div');
-		logout.id = "logoutDiv";
-		logout.innerHTML = "<p><input id='logoutButton' type='button' value='Log Out'></p>";
-		loginDiv.append(logout);
-
-		logout.addEventListener('click', async function logout(event) {
-		document.cookie = "CustomerId=; Max-Age=0;";
-		document.cookie = "CustomerName=; Max-Age=0;";
-		location.reload();
-
-		});
-	};
-};
-
-loginReference.onclick = function () { window.location = 'login.html'; }
-
- targetQuery = async function query () {
+	startLoadingAnimation();
 
 	let setNameIndex = document.getElementById("SetName").options.selectedIndex;
 	let setNameValue= document.getElementById("SetName").options[setNameIndex].value;
@@ -63,6 +31,7 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 	let rarityIndex = document.getElementById("Rarity").options.selectedIndex;
 	let rarityValue= document.getElementById("Rarity").options[rarityIndex].value;
 
+
 	let properties = {
 		setName: setNameValue,
 		cardClass: setClassValue,
@@ -70,116 +39,105 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 		cost: costValue,
 		faction: factionValue,
 		rarity: rarityValue,
+		customerId: customerIdFromCookies,
 	};
-	let response = await fetch ('http://89.179.245.199:8080/WowTCGWebserver/', {
+	// let response = await fetch ('http://89.179.245.199:8080/card/collection/', {
+	let response = await fetch ('https://wowtcgserver.herokuapp.com/card/collection/', {
 
 		method: 'POST',
-
+		
 		headers: {
-			'Content-Type': 'application/json', // charset=utf-8
+			'Content-Type': 'application/json',
 			'Accept': 'application/json',
-			'Origin': 'http://89.179.245.199:80/',
+			'Origin': 'http://www.wowtcgdatabase.com/',
 			'Access-Control-Request-Method': 'POST',
 			'Access-Control-Request-Headers': 'Content-Type',
 		},
 		body: JSON.stringify(properties)
 	});
-	console.log(JSON.stringify(properties));
+
 
 	let result = await response.json();
-	console.log(result);
+	stopLoadingAnimation();
 
 
 	document.getElementById('resultTable').innerHTML = "";
-	// let resultTable = document.getElementById('resultTable');
-	// let resultDiv = document.createElement("div");
-	// resultDiv.id = "resultDiv";
-	// resultTable.append(resultDiv);
+	document.getElementById('resultCount').innerHTML = "";
 
 	let resultCard = result;
-	// let resultCard = JSON.parse(result);
-	console.log(resultCard);
 
 	if (Object.keys(resultCard).length == 0) {
 
 		let resultTable = document.getElementById('resultTable');
 		let notFound = document.createElement('div');
 		notFound.id = "notFoundDiv";
-		notFound.innerHTML = '<h1 class = "notFoundText"> Cards with selected parameters not found</h1><br/><h1 class = "notFoundText">Change the request parameters and try again </h1>';
+		notFound.innerHTML = '<h1 class = "notFoundText">Cards not found</h1><br/><h1 class = "notFoundText">Change the request parameters or add cards and try again</h1>';
 		resultTable.append(notFound);
+	} else {
+		$("#resultCount").show();
+		let container = document.getElementById('resultCount');
+		let amountFound = document.createElement('div');
+		amountFound.id = "amountFoundDiv";
+		amountFound.innerHTML = '<h3 class = "amountFoundText">'+Object.keys(resultCard).length+' card(s) have been found</h3>';
+		container.append(amountFound);
 	}
 
 	for (let key in resultCard) {
 
 		if (typeof resultCard[key].cardName !== 'undefined') {
 
-			cardId = resultCard[key].cardId;
-
 			let resultTable = document.getElementById('resultTable');
-
 
 			let createdOverallDiv = document.createElement('div');
 			createdOverallDiv.className = "createdOverallDiv";
 
 			resultTable.append(createdOverallDiv);
 
-			if (customerIdFromCookies > 0) {
-				let createdButtonsDiv = document.createElement('div');
-				createdButtonsDiv.className = "createdButtonsDiv";
+			let createdButtonsDiv = document.createElement('div');
+			createdButtonsDiv.className = "createdButtonsDiv";
 
-				createdOverallDiv.append(createdButtonsDiv);
+			createdOverallDiv.append(createdButtonsDiv);
 
-				let createdButtonAddDiv = document.createElement('div');
-				createdButtonAddDiv.className = "createdButtonAddDiv";
-				createdButtonAddDiv.innerHTML = "<input class='resultButton' type='button' value='+' title = 'Add to your collection'>";
+			let createdButtonDeleteDiv = document.createElement('div');
+			createdButtonDeleteDiv.className = "createdButtonDeleteDiv";
+			createdButtonDeleteDiv.innerHTML = "<p><input class='resultButton' type='button' value='-' title='Delete from your collection'></p>";
 
-				createdButtonsDiv.append(createdButtonAddDiv);
+			createdButtonsDiv.append(createdButtonDeleteDiv);
 
-				createdButtonAddDiv.addEventListener('click', async function addCard (event) {
+			createdButtonDeleteDiv.addEventListener('click', async function deleteCard (event) {
 
-					function getCookie(name) {
-						let cookie = {};
-						document.cookie.split(';').forEach(function(el) {
-							let [k,v] = el.split('=');
-							cookie[k.trim()] = v;
-						})
-						return cookie[name];
-					}
+				startLoadingAnimation();
 
-					let customerIdFromCookies = getCookie('CustomerId');
-
-					let cardAdd = {
+					let cardDelete = {
 						customerId: customerIdFromCookies,
 						cardId: resultCard[key].cardId,
 					};
-					let addResponse = await fetch ('http://89.179.245.199:8080/addcard/', {
+					// let deleteResponse = await fetch('http://89.179.245.199:8080/card/delete/', {
+					let deleteResponse = await fetch('https://wowtcgserver.herokuapp.com/card/delete/', {
 
 						method: 'POST',
 
 						headers: {
-							'Content-Type': 'application/json', // charset=utf-8
+							'Content-Type': 'application/json',
 							'Accept': 'application/json',
-							'Origin': 'http://89.179.245.199:80/',
+							'Origin': 'http://www.wowtcgdatabase.com/',
 							'Access-Control-Request-Method': 'POST',
 							'Access-Control-Request-Headers': 'Content-Type',
 						},
-						body: JSON.stringify(cardAdd)
+						body: JSON.stringify(cardDelete)
 					});
-					console.log(JSON.stringify(cardAdd));
 
-					let addResult = await addResponse.status;
 
-					if (addResult == 200) {
-						document.getElementById('message').innerHTML = '"'+resultCard[key].cardName + '" has been added to your collection';
+					let deleteResult = await deleteResponse.status;
+					stopLoadingAnimation();
+
+					if (deleteResult == 200) {
+						document.getElementById('message').innerHTML = '"'+resultCard[key].cardName + '" has been deleted from your collection';
 						getPopUp();
-					} else {
-						if (addResult != 200) {
-							document.getElementById('message').innerHTML = '"'+resultCard[key].cardName + '" is already in your collection';
-							getPopUp();
-						}
 					}
-				});
-			}
+
+					await query();
+			});
 
 			let createdImageDiv = document.createElement('div');
 			createdImageDiv.className = "createdImageDiv";
@@ -202,16 +160,14 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 			}
 
 			let resultAllyClass;
-			if (resultCard[key].allyClass !== null) {
-			// if (typeof resultCard[key].allyClass !== 'undefined') {
+			if (resultCard[key].allyClass !== "") {
 				resultAllyClass = "<span class = 'parametersName'>Ally Class: </span>" + "<span class = 'parametersValue'>" + resultCard[key].allyClass + "</span><br/>";
 			} else {
 				resultAllyClass = ""
 			}
 
 			let resultRace;
-			if (resultCard[key].race !== null) {
-			// if (typeof resultCard[key].race !== 'undefined') {
+			if (resultCard[key].race !== "") {
 				resultRace = "<span class = 'parametersName'>Race: </span>" + "<span class = 'parametersValue'>" + resultCard[key].race + "</span><br/>";
 			} else {
 				resultRace = ""
@@ -239,8 +195,7 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 			}
 
 			let resultAttackType;
-			if (resultCard[key].attackType !== null) {
-			// if (typeof resultCard[key].attackType !== 'null') {
+			if (resultCard[key].attackType !== "") {
 				resultAttackType = "<span class = 'parametersName'>Attack Type: </span>" + "<span class = 'parametersValue'>" + resultCard[key].attackType + "</span><br/>";
 			} else {
 				resultAttackType = ""
@@ -277,9 +232,20 @@ loginReference.onclick = function () { window.location = 'login.html'; }
 
 		};
 	};
-};
 
-filterButton.onclick = targetQuery;
+};
+filterButton.onclick = cardQuery;
+
+window.onload = function start (){
+
+	customerNameFromCookies = getCookie('CustomerName');
+	let trimName = customerNameFromCookies.replace(/'/g, '');
+	let title = document.getElementById('topTitleCollection');
+	title.innerHTML = "<h2 id = 'topTitleCollection'> "+trimName+"&#39;s Collection </h2>";
+
+	cardQuery();
+
+};
 
 (function() {
 	'use strict';
@@ -314,13 +280,13 @@ function getPopUp() {
 	setTimeout(function() { $("#success-message").fadeOut('slow'); }, 1000);
 }
 
+function startLoadingAnimation () {
+	$(".cssload-container").show();
+}
 
-
-
-
-
-
-
+function stopLoadingAnimation () {
+	$(".cssload-container").hide();
+}
 
 
 
