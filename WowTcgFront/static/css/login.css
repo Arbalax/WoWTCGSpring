@@ -1,0 +1,216 @@
+@font-face {
+
+    font-family: WoW2;
+    src: url("../Fonts/WoW-plexus.ttf");
+}
+
+@font-face {
+    font-family: "Comic Sans MS";
+    src: url("../Fonts/ComicSansMS.ttf");
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-image: url("../backgrounds/background.gif");
+    margin: 0;
+}
+
+#mainTitle {
+    display: flex;
+    text-align: center;
+    font-family: WoW2, cursive;
+    justify-content: center;
+    color: #C25E28;
+}
+
+#mainTitle a {
+    color: #C25E28;
+}
+
+#mainTitle a:visited {
+    color: #C25E28;
+}
+
+#mainTitle a:hover {
+    color: #416678;
+}
+
+#loginContainer {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#authorization {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.authField {
+    display: flex;
+    width: 450px;
+    height: 30px;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 20px;
+    color: #416678;
+}
+
+.authButton {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 20px;
+    font-weight: bold;
+    color: #416678;
+    border-radius: 25px;
+    border-width: 0;
+    outline: none;
+    background-color: #D89B41;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: .3s;
+}
+
+.authButton:hover {
+    color: #D89B41;
+    background-color: #416678;
+}
+
+.warning {
+    display: none;
+    font-size: 20px;
+    font-family: 'Comic Sans MS', cursive;
+    color: #FD1A0C;
+}
+
+#accountQuestion {
+    display: flex;
+    justify-content: center;
+    font-family: "Comic Sans MS", cursive;
+    color: #416678;
+    margin-top: 35px;
+}
+
+#signUpContainer {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: "Comic Sans MS", cursive;
+    color: #416678;
+}
+
+#registration {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.createdSignUpWarning {
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    font-family: 'Comic Sans MS', cursive;
+    color: #FD1A0C;
+}
+
+.cssload-container{
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    z-index:1000;
+    display:none;
+}
+
+.cssload-whirlpool,
+.cssload-whirlpool::before,
+.cssload-whirlpool::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgb(204,204,204);
+    border-left-color: rgba(194,94,40,0.98);
+    border-radius: 974px;
+    -o-border-radius: 974px;
+    -ms-border-radius: 974px;
+    -webkit-border-radius: 974px;
+    -moz-border-radius: 974px;
+}
+
+.cssload-whirlpool {
+    /*display: none,*/
+    margin: -24px 0 0 -24px;
+    height: 49px;
+    width: 49px;
+    animation: cssload-rotate 1150ms linear infinite;
+    -o-animation: cssload-rotate 1150ms linear infinite;
+    -ms-animation: cssload-rotate 1150ms linear infinite;
+    -webkit-animation: cssload-rotate 1150ms linear infinite;
+    -moz-animation: cssload-rotate 1150ms linear infinite;
+}
+
+.cssload-whirlpool::before {
+    content: "";
+    margin: -22px 0 0 -22px;
+    height: 43px;
+    width: 43px;
+    animation: cssload-rotate 1150ms linear infinite;
+    -o-animation: cssload-rotate 1150ms linear infinite;
+    -ms-animation: cssload-rotate 1150ms linear infinite;
+    -webkit-animation: cssload-rotate 1150ms linear infinite;
+    -moz-animation: cssload-rotate 1150ms linear infinite;
+}
+
+.cssload-whirlpool::after {
+    content: "";
+    margin: -28px 0 0 -28px;
+    height: 55px;
+    width: 55px;
+    animation: cssload-rotate 2300ms linear infinite;
+    -o-animation: cssload-rotate 2300ms linear infinite;
+    -ms-animation: cssload-rotate 2300ms linear infinite;
+    -webkit-animation: cssload-rotate 2300ms linear infinite;
+    -moz-animation: cssload-rotate 2300ms linear infinite;
+}
+
+
+
+@keyframes cssload-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes cssload-rotate {
+    100% {
+        -o-transform: rotate(360deg);
+    }
+}
+
+@-ms-keyframes cssload-rotate {
+    100% {
+        -ms-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes cssload-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes cssload-rotate {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+

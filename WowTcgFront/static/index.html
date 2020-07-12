@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <meta charset = "utf-8">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <title> Wow TCG Database </title>
+    <link rel = "shortcut icon" href = "WowTcgIcon.png" type = "image/x-icon">
+    <link rel = "stylesheet" href = "css/style.css">
+</head>
+
+<body>
+    <div class="page">
+        <div class="page__header">
+            <div class="header">
+<!--                <div id ='topMenu'>-->
+                    <div class="header__login">
+                        <div id = "loginDiv">
+                            <h2>Log in to create<br/>
+                            your own collection</h2>
+                            <div id = loginButtonDiv>
+                                <input id = "loginReference" type = "button" value="Log_In"> </input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header__title">
+<!--                        <div id ="topTitleDiv">-->
+                            <h1> World_of_Warcraft <br/>
+                             Trading_Card_Game </h1>
+<!--                        </div>-->
+                    </div>
+                    <div class="header__spacer"></div>
+<!--                </div>-->
+            </div>
+        </div>
+        <div class="page__content">
+            <div class="content">
+                <nav class = "mainMenu">
+                    <ul id = "mainMenuList">
+                        <li> <a href = "index.html"> Database </a> </li>
+                    </ul>
+                </nav>
+
+                <div id = "containerDatabase">
+                    <div id = "leftMenuDatabase">
+
+                        <h1 id = "leftMenuTitleDatabase"> Filter </h1>
+
+                        <div id = "filtersDiv">
+
+                            <select class = "selectFilter" id = "SetName">
+                                <option class = "optionFilter" selected value="All">Any Set</option>
+                                <option value="Heroes of Azeroth">Heroes of Azeroth</option>
+                            </select>
+
+                            <select class = "selectFilter" id = "Rarity">
+                                <option selected value="All">All Rarities</option>
+                                <option id = "Common" value="Common">Common</option>
+                                <option id = "Uncommon" value="Uncommon">Uncommon</option>
+                                <option id = "Rare" value="Rare">Rare</option>
+                                <option id = "Epic" value="Epic">Epic</option>
+                            </select>
+
+                            <select class = "selectFilter" id = "Type">
+                                <option selected value=All>All Types</option>
+                                <option value="Hero">Hero</option>
+                                <option value="Ability">Ability</option>
+                                <option value="Ally">Ally</option>
+                                <option value="Equipment">Equipment</option>
+                                <option value="Quest">Quest</option>
+                            </select>
+
+                            <select class = "selectFilter" id = "Faction">
+                                <option selected value="All">All Factions</option>
+                                <option id = "Alliance" value="Alliance">Alliance</option>
+                                <option id = "Horde" value="Horde">Horde</option>
+                                <option value="Neutral">Neutral</option>
+                            </select>
+
+                            <select class = "selectFilter" id = "Class">
+                                <option selected value="All">All Classes</option>
+                                <option value="Any">Any class</option>
+                                <option id = "Druid" value="Druid">Druid</option>
+                                <option id = "Hunter" value="Hunter">Hunter</option>
+                                <option id = "Mage" value="Mage">Mage</option>
+                                <option id = "Paladin" value="Paladin">Paladin</option>
+                                <option id = "Priest" value="Priest">Priest</option>
+                                <option id = "Rogue" value="Rogue">Rogue</option>
+                                <option id = "Shaman" value="Shaman">Shaman</option>
+                                <option id = "Warlock" value="Warlock">Warlock</option>
+                                <option id = "Warrior" value="Warrior">Warrior</option>
+                            </select>
+
+                            <select class = "selectFilter" id = "Cost">
+                                <option selected value="-10">Any Cost</option>
+                                <option value=0> 0 </option>
+                                <option value=1> 1 </option>
+                                <option value=2> 2 </option>
+                                <option value=3> 3 </option>
+                                <option value=4> 4 </option>
+                                <option value=5> 5 </option>
+                                <option value=6> 6 </option>
+                                <option value=7> 7 </option>
+                                <option value=8> 8 </option>
+                                <option value=9> 9 </option>
+                                <option value=10> 10+ </option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <p><input id="filterButton" type="button" value="Find"></p>
+                        </div>
+
+                    </div>
+
+                    <div id = "result">
+                        <div id = "resultCount">
+                        </div>
+                        <div id = "resultTable">
+                            <div id = "resultTableStart">
+                                <h1 id = "startText1"> Choose_parameters_in_left_menu </h1>
+                                <h1 id = "startText2"> Results_will_be_here </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="back_to_top" title="Наверх">↑</a>
+
+                <div class="cssload-container">
+                    <div class="cssload-whirlpool"></div>
+                </div>
+
+                <div id="success-message">
+                    <div class="popup">
+                        <h4 id="message"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page__footer">
+            <footer class="footer">
+                Mikhail Kolobov &lt;kolobov.michael@gmail.com&gt;, 2020
+            </footer>
+        </div>
+    </div>
+
+<script src = "js/script.js"> </script>
+</body>
+</html>
