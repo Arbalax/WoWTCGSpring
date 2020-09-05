@@ -214,3 +214,16 @@ body {
     }
 }
 
+@media handheld and (orientation: portrait), screen and (orientation: portrait) {
+    .authField {
+        width: auto;
+    }
+
+    #mainTitle {
+        font-size: x-large;
+    }
+
+    #signUpContainer {
+        text-align: center;
+    }
+}
